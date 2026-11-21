@@ -18,7 +18,9 @@ def _load_skill_map():
     path = SKILLS_JSON_PATH
     if not os.path.exists(path):
         # Fallback to relative path lookup
-        path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../data/skills.json"))
+        path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data/skills.json"))
+    if not os.path.exists(path):
+        path = os.path.abspath("data/skills.json")
 
     if not os.path.exists(path):
         return
