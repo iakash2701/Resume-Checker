@@ -1,0 +1,15 @@
+{
+  "id": "jd-003",
+  "title": "DevOps Engineer",
+  "min_experience": 2.0,
+  "required_skills": [
+    "Linux",
+    "Docker",
+    "AWS",
+    "Git",
+    "CI/CD",
+    "Python",
+    "Kubernetes"
+  ],
+  "description": "We are seeking a DevOps Engineer to automate and scale our cloud deployment pipelines. You should have strong hands-on experience with Linux environments, Docker containers, AWS cloud infrastructure, Kubernetes orchestration, and automated CI/CD workflows."
+}

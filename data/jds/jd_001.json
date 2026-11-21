@@ -1,0 +1,15 @@
+{
+  "id": "jd-001",
+  "title": "Full-Stack Developer",
+  "min_experience": 1.0,
+  "required_skills": [
+    "React",
+    "Node.js",
+    "JavaScript",
+    "TypeScript",
+    "SQL",
+    "Git",
+    "REST API"
+  ],
+  "description": "We are seeking a Full-Stack Developer to build and maintain high-performance web applications. You will work across frontend React codebases and backend Node.js / Python microservices, designing database schemas, integrating REST APIs, and collaborating with Git workflows."
+}

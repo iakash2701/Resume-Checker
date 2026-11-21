@@ -1,0 +1,336 @@
+{
+  "skills": {
+    "React": {
+      "aliases": ["react", "reactjs", "react.js", "react js"],
+      "implies": ["JavaScript"]
+    },
+    "JavaScript": {
+      "aliases": ["js", "javascript", "ecmascript", "es6", "es6+"],
+      "implies": []
+    },
+    "TypeScript": {
+      "aliases": ["ts", "typescript"],
+      "implies": ["JavaScript"]
+    },
+    "Node.js": {
+      "aliases": ["node", "nodejs", "node.js", "node js"],
+      "implies": ["JavaScript"]
+    },
+    "Python": {
+      "aliases": ["py", "python", "python3"],
+      "implies": []
+    },
+    "FastAPI": {
+      "aliases": ["fastapi", "fast api", "fast-api"],
+      "implies": ["Python", "REST API"]
+    },
+    "Django": {
+      "aliases": ["django"],
+      "implies": ["Python"]
+    },
+    "Flask": {
+      "aliases": ["flask"],
+      "implies": ["Python"]
+    },
+    "PostgreSQL": {
+      "aliases": ["postgres", "postgresql", "psql"],
+      "implies": ["SQL"]
+    },
+    "MySQL": {
+      "aliases": ["mysql"],
+      "implies": ["SQL"]
+    },
+    "SQL": {
+      "aliases": ["sql", "rdbms", "relational database"],
+      "implies": []
+    },
+    "MongoDB": {
+      "aliases": ["mongo", "mongodb"],
+      "implies": ["NoSQL"]
+    },
+    "NoSQL": {
+      "aliases": ["nosql", "non-relational"],
+      "implies": []
+    },
+    "Redis": {
+      "aliases": ["redis"],
+      "implies": []
+    },
+    "Kubernetes": {
+      "aliases": ["k8s", "kubernetes", "kube"],
+      "implies": ["Docker", "DevOps"]
+    },
+    "Docker": {
+      "aliases": ["docker", "containerization", "containers"],
+      "implies": ["DevOps"]
+    },
+    "DevOps": {
+      "aliases": ["devops", "ci/cd", "cicd", "continuous integration"],
+      "implies": []
+    },
+    "AWS": {
+      "aliases": ["aws", "amazon web services", "ec2", "s3", "lambda"],
+      "implies": ["Cloud Computing"]
+    },
+    "Azure": {
+      "aliases": ["azure", "microsoft azure"],
+      "implies": ["Cloud Computing"]
+    },
+    "GCP": {
+      "aliases": ["gcp", "google cloud", "google cloud platform"],
+      "implies": ["Cloud Computing"]
+    },
+    "Cloud Computing": {
+      "aliases": ["cloud", "cloud computing"],
+      "implies": []
+    },
+    "Git": {
+      "aliases": ["git", "version control", "vcs"],
+      "implies": []
+    },
+    "GitHub": {
+      "aliases": ["github"],
+      "implies": ["Git"]
+    },
+    "GitLab": {
+      "aliases": ["gitlab"],
+      "implies": ["Git"]
+    },
+    "Linux": {
+      "aliases": ["linux", "unix", "ubuntu", "debian", "centos", "bash", "shell scripting", "shell"],
+      "implies": []
+    },
+    "HTML": {
+      "aliases": ["html", "html5"],
+      "implies": ["Web Development"]
+    },
+    "CSS": {
+      "aliases": ["css", "css3"],
+      "implies": ["Web Development"]
+    },
+    "Tailwind CSS": {
+      "aliases": ["tailwind", "tailwindcss", "tailwind css"],
+      "implies": ["CSS"]
+    },
+    "Bootstrap": {
+      "aliases": ["bootstrap"],
+      "implies": ["CSS"]
+    },
+    "Sass": {
+      "aliases": ["sass", "scss"],
+      "implies": ["CSS"]
+    },
+    "Next.js": {
+      "aliases": ["nextjs", "next.js", "next js"],
+      "implies": ["React", "JavaScript"]
+    },
+    "Vue.js": {
+      "aliases": ["vue", "vuejs", "vue.js", "vue 3"],
+      "implies": ["JavaScript"]
+    },
+    "Angular": {
+      "aliases": ["angular", "angularjs", "angular 2+"],
+      "implies": ["TypeScript", "JavaScript"]
+    },
+    "Java": {
+      "aliases": ["java", "core java", "j2ee"],
+      "implies": []
+    },
+    "Spring Boot": {
+      "aliases": ["spring", "springboot", "spring boot", "spring framework"],
+      "implies": ["Java"]
+    },
+    "C++": {
+      "aliases": ["c++", "cpp"],
+      "implies": ["C"]
+    },
+    "C": {
+      "aliases": ["c language", "ansi c"],
+      "implies": []
+    },
+    "C#": {
+      "aliases": ["c#", "csharp", "c sharp"],
+      "implies": [".NET"]
+    },
+    ".NET": {
+      "aliases": [".net", "dotnet", "asp.net", ".net core"],
+      "implies": []
+    },
+    "Go": {
+      "aliases": ["golang", "go language", "go lang"],
+      "implies": []
+    },
+    "Rust": {
+      "aliases": ["rust", "rustlang"],
+      "implies": []
+    },
+    "PHP": {
+      "aliases": ["php", "php7", "php8"],
+      "implies": []
+    },
+    "Laravel": {
+      "aliases": ["laravel"],
+      "implies": ["PHP"]
+    },
+    "Ruby": {
+      "aliases": ["ruby"],
+      "implies": []
+    },
+    "Ruby on Rails": {
+      "aliases": ["rails", "ruby on rails", "ror"],
+      "implies": ["Ruby"]
+    },
+    "GraphQL": {
+      "aliases": ["graphql", "gql"],
+      "implies": ["REST API"]
+    },
+    "REST API": {
+      "aliases": ["rest", "rest api", "restful", "restful api", "apis"],
+      "implies": []
+    },
+    "Microservices": {
+      "aliases": ["microservices", "microservice architecture", "distributed systems"],
+      "implies": []
+    },
+    "Machine Learning": {
+      "aliases": ["ml", "machine learning", "supervised learning", "unsupervised learning"],
+      "implies": ["Artificial Intelligence"]
+    },
+    "Deep Learning": {
+      "aliases": ["dl", "deep learning", "neural networks", "cnn", "rnn"],
+      "implies": ["Machine Learning"]
+    },
+    "Artificial Intelligence": {
+      "aliases": ["ai", "artificial intelligence"],
+      "implies": []
+    },
+    "Natural Language Processing": {
+      "aliases": ["nlp", "natural language processing", "text analytics"],
+      "implies": ["Machine Learning"]
+    },
+    "Computer Vision": {
+      "aliases": ["cv", "computer vision", "image processing", "opencv"],
+      "implies": ["Machine Learning"]
+    },
+    "TensorFlow": {
+      "aliases": ["tensorflow", "tf"],
+      "implies": ["Machine Learning", "Python"]
+    },
+    "PyTorch": {
+      "aliases": ["pytorch", "torch"],
+      "implies": ["Machine Learning", "Python"]
+    },
+    "Scikit-Learn": {
+      "aliases": ["scikit-learn", "sklearn", "scikit learn"],
+      "implies": ["Machine Learning", "Python"]
+    },
+    "Pandas": {
+      "aliases": ["pandas"],
+      "implies": ["Python", "Data Analysis"]
+    },
+    "NumPy": {
+      "aliases": ["numpy"],
+      "implies": ["Python"]
+    },
+    "Data Analysis": {
+      "aliases": ["data analytics", "data analysis", "exploratory data analysis", "eda"],
+      "implies": []
+    },
+    "Data Science": {
+      "aliases": ["data science"],
+      "implies": ["Data Analysis", "Machine Learning"]
+    },
+    "Data Visualization": {
+      "aliases": ["data visualization", "data viz", "dataviz"],
+      "implies": []
+    },
+    "Power BI": {
+      "aliases": ["power bi", "powerbi", "power-bi", "dax"],
+      "implies": ["Data Visualization", "Data Analysis"]
+    },
+    "Tableau": {
+      "aliases": ["tableau", "tableau desktop"],
+      "implies": ["Data Visualization", "Data Analysis"]
+    },
+    "Excel": {
+      "aliases": ["ms excel", "excel", "microsoft excel", "spreadsheets", "vlookup"],
+      "implies": ["Data Analysis"]
+    },
+    "Statistics": {
+      "aliases": ["statistics", "statistical analysis", "probability", "hypothesis testing"],
+      "implies": []
+    },
+    "CI/CD": {
+      "aliases": ["ci/cd", "cicd", "continuous deployment", "jenkins", "github actions"],
+      "implies": ["DevOps"]
+    },
+    "Terraform": {
+      "aliases": ["terraform", "iac", "infrastructure as code"],
+      "implies": ["DevOps", "Cloud Computing"]
+    },
+    "Ansible": {
+      "aliases": ["ansible"],
+      "implies": ["DevOps"]
+    },
+    "Kafka": {
+      "aliases": ["kafka", "apache kafka", "event streaming"],
+      "implies": []
+    },
+    "RabbitMQ": {
+      "aliases": ["rabbitmq", "message broker", "amqp"],
+      "implies": []
+    },
+    "Elasticsearch": {
+      "aliases": ["elasticsearch", "elastic search", "elk", "elk stack"],
+      "implies": []
+    },
+    "GraphQL": {
+      "aliases": ["graphql"],
+      "implies": []
+    },
+    "Web Development": {
+      "aliases": ["web development", "frontend development", "full stack development"],
+      "implies": []
+    },
+    "Agile": {
+      "aliases": ["agile", "scrum", "kanban", "sprint planning"],
+      "implies": []
+    },
+    "Cybersecurity": {
+      "aliases": ["cybersecurity", "information security", "infosec", "penetration testing"],
+      "implies": []
+    },
+    "Networking": {
+      "aliases": ["computer networks", "tcp/ip", "dns", "http/https", "networking"],
+      "implies": []
+    },
+    "Big Data": {
+      "aliases": ["big data", "hadoop", "spark", "apache spark", "hive"],
+      "implies": []
+    },
+    "Prompt Engineering": {
+      "aliases": ["prompt engineering", "llm", "large language models", "generative ai", "genai"],
+      "implies": ["Artificial Intelligence"]
+    },
+    "Testing": {
+      "aliases": ["qa", "unit testing", "software testing", "selenium", "pytest", "jest", "cypress"],
+      "implies": []
+    },
+    "Swift": {
+      "aliases": ["swift", "ios development", "swiftui"],
+      "implies": ["Mobile Development"]
+    },
+    "Kotlin": {
+      "aliases": ["kotlin", "android development"],
+      "implies": ["Mobile Development"]
+    },
+    "Flutter": {
+      "aliases": ["flutter", "dart"],
+      "implies": ["Mobile Development"]
+    },
+    "Mobile Development": {
+      "aliases": ["mobile app development", "mobile development"],
+      "implies": []
+    }
+  }
+}

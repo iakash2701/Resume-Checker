@@ -1,0 +1,14 @@
+{
+  "id": "jd-002",
+  "title": "Data Analyst",
+  "min_experience": 0.5,
+  "required_skills": [
+    "Python",
+    "SQL",
+    "Power BI",
+    "Excel",
+    "Statistics",
+    "Data Visualization"
+  ],
+  "description": "HireSwift is hiring a Data Analyst to transform complex business datasets into actionable operational dashboards and analytics reports. You will work extensively with SQL data warehouses, Python analysis scripts, and interactive Power BI reports."
+}
