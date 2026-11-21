@@ -73,6 +73,7 @@ export default function App() {
 
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [blindReviewMode, setBlindReviewMode] = useState(false);
+  const [isUploadingResume, setIsUploadingResume] = useState(false);
   const [candidateDuplicates, setCandidateDuplicates] = useState(null);
   const [candidateSkillGap, setCandidateSkillGap] = useState(null);
   const [candidateIntelligence, setCandidateIntelligence] = useState(null);
@@ -271,6 +272,37 @@ export default function App() {
   };
 
   // CSV Export Trigger
+  const handleResumeUpload = async (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    setIsUploadingResume(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch(`${API_BASE}/resumes/upload`, {
+        method: "POST",
+        body: formData
+      });
+
+      if (res.ok) {
+        const createdCand = await res.json();
+        await fetchCandidates();
+        await fetchStats();
+        openCandidateDrawer(createdCand);
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        alert(`Failed to upload resume: ${errData.detail || res.statusText}`);
+      }
+    } catch (err) {
+      alert(`Network error uploading resume: ${err.message}`);
+    } finally {
+      setIsUploadingResume(false);
+      e.target.value = "";
+    }
+  };
+
   const handleExportCSV = () => {
     let url = `${API_BASE}/candidates/export?`;
     const params = [];
@@ -779,19 +811,19 @@ export default function App() {
             </button>
 
             {/* Resume Upload input */}
-            <label className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 flex items-center cursor-pointer shadow-xs">
-              <Upload className="h-3.5 w-3.5 mr-1.5 text-slate-500" />
-              Upload Resume
+            <label className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors flex items-center cursor-pointer shadow-xs ${
+              isUploadingResume 
+                ? "bg-slate-100 text-slate-400 border-slate-200 cursor-wait" 
+                : "bg-white border-slate-200 hover:bg-slate-50 text-slate-700"
+            }`}>
+              <Upload className={`h-3.5 w-3.5 mr-1.5 ${isUploadingResume ? "animate-bounce text-indigo-600" : "text-slate-500"}`} />
+              {isUploadingResume ? "Uploading..." : "Upload Resume"}
               <input
                 type="file"
                 accept=".pdf,.docx,.txt"
+                disabled={isUploadingResume}
                 className="hidden"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file) {
-                    alert(`Selected ${file.name} for parsing into candidates pool.`);
-                  }
-                }}
+                onChange={handleResumeUpload}
               />
             </label>
 

@@ -1,6 +1,9 @@
+from app.services.resume_parser import parse_resume
 import math
 from datetime import datetime
-from fastapi import APIRouter, Depends, HTTPException, Query, Body, status, Response
+from fastapi import APIRouter, Depends, HTTPException, Query, Body, status, Response, UploadFile, File
+import tempfile
+import os
 from fastapi.responses import PlainTextResponse
 from sqlalchemy.orm import Session
 from sqlalchemy import desc, asc, or_
@@ -755,3 +758,98 @@ def create_jd_from_text(payload: JobDescriptionCreate, db: Session = Depends(get
     db.commit()
     db.refresh(new_jd)
     return new_jd
+
+
+@router.post("/resumes/upload", response_model=CandidateResponse)
+async def upload_and_parse_resume(
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db)
+):
+    filename = file.filename or "uploaded_resume.pdf"
+    ext = os.path.splitext(filename)[1].lower()
+    if ext not in [".pdf", ".docx", ".txt"]:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unsupported file format '{ext}'. Allowed formats: .pdf, .docx, .txt"
+        )
+
+    # Save to tempfile
+    with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
+        tmp_path = tmp.name
+        content = await file.read()
+        tmp.write(content)
+
+    try:
+        parsed = parse_resume(tmp_path)
+    except Exception as e:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        raise HTTPException(status_code=422, detail=f"Failed to parse resume: {str(e)}")
+
+    if os.path.exists(tmp_path):
+        os.remove(tmp_path)
+
+    # Check for duplicate by email or resume_filename
+    cand = None
+    if parsed.get("email"):
+        cand = db.query(Candidate).filter(Candidate.email == parsed["email"]).first()
+    if not cand:
+        cand = db.query(Candidate).filter(Candidate.resume_filename == filename).first()
+
+    if not cand:
+        cand = Candidate(
+            name=parsed.get("name") or os.path.splitext(filename)[0].replace("_", " ").title(),
+            email=parsed.get("email"),
+            phone=parsed.get("phone"),
+            location=parsed.get("location"),
+            college=parsed.get("college"),
+            degree=parsed.get("degree"),
+            grad_year=parsed.get("grad_year"),
+            tenth_pct=parsed.get("tenth_pct"),
+            twelfth_pct=parsed.get("twelfth_pct"),
+            cgpa_10=parsed.get("cgpa_10"),
+            years_experience=float(parsed.get("years_experience") or 0.0),
+            resume_filename=filename,
+            resume_text=parsed.get("resume_text", ""),
+            pipeline_stage="Applied"
+        )
+        db.add(cand)
+        db.flush()
+
+        # Audit log creation
+        db.add(AuditLog(
+            candidate_id=cand.id,
+            from_stage=None,
+            to_stage="Applied",
+            changed_by="Resume Upload Pipeline"
+        ))
+    else:
+        # Update existing record
+        cand.name = parsed.get("name") or cand.name
+        cand.email = parsed.get("email") or cand.email
+        cand.phone = parsed.get("phone") or cand.phone
+        cand.location = parsed.get("location") or cand.location
+        cand.college = parsed.get("college") or cand.college
+        cand.degree = parsed.get("degree") or cand.degree
+        cand.grad_year = parsed.get("grad_year") or cand.grad_year
+        cand.tenth_pct = parsed.get("tenth_pct") if parsed.get("tenth_pct") is not None else cand.tenth_pct
+        cand.twelfth_pct = parsed.get("twelfth_pct") if parsed.get("twelfth_pct") is not None else cand.twelfth_pct
+        cand.cgpa_10 = parsed.get("cgpa_10") if parsed.get("cgpa_10") is not None else cand.cgpa_10
+        cand.years_experience = float(parsed.get("years_experience") or cand.years_experience)
+        cand.resume_text = parsed.get("resume_text") or cand.resume_text
+
+    # Store / update extracted evidence
+    db.query(CandidateFieldEvidence).filter(CandidateFieldEvidence.candidate_id == cand.id).delete()
+    for ev in parsed.get("evidence", []):
+        db.add(CandidateFieldEvidence(
+            candidate_id=cand.id,
+            field_name=ev["field_name"],
+            value=ev.get("value"),
+            confidence=ev.get("confidence", "medium"),
+            source_text=ev.get("source_text"),
+            human_verified=ev.get("human_verified", False)
+        ))
+
+    db.commit()
+    db.refresh(cand)
+    return cand
