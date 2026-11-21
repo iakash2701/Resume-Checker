@@ -777,6 +777,23 @@ export default function App() {
               Compare Selected ({selectedForCompare.length}/3)
             </button>
 
+            {/* Resume Upload input */}
+            <label className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 flex items-center cursor-pointer shadow-xs">
+              <Upload className="h-3.5 w-3.5 mr-1.5 text-slate-500" />
+              Upload Resume
+              <input
+                type="file"
+                accept=".pdf,.docx,.txt"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    alert(`Selected ${file.name} for parsing into candidates pool.`);
+                  }
+                }}
+              />
+            </label>
+
             {/* Export CSV button */}
             <button
               onClick={handleExportCSV}
